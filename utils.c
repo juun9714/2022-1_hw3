@@ -781,17 +781,17 @@ int send_app_message(int sd, char* dst_name, ushort len, u_char type, char* dat)
 char* recvmessage(int sd, in_addr_t* src, ushort* len, u_char* type)
 {
   IPPkt* ippkt; //IP packet
-  EthPkt* eth;
+  //EthPkt* eth;
   struct in_addr addr;
   char* dat;
   int flag = 0; //it is used to know if there is an IP address matched with the destination IP address
   int i;
  
   ippkt = recvippkt(sd);//socket에서 ip packet 받기
-  eth=recvethpkt(sd);
+  //eth=recvethpkt(sd);
   printf("IN util dump one packet into ip and eth\n");
 
-  dumpethpkt(eth);
+  //dumpethpkt(eth);
   dumpippkt(ippkt);
   printf("IN util dump one packet into ip and eth DONE\n");
 
@@ -845,13 +845,17 @@ char* recvmessage(int sd, in_addr_t* src, ushort* len, u_char* type)
 /* recv an IP packet */
 IPPkt *recvippkt(int sd)
 {
+  printf("@@@@IN recvippkt@@@\n");
   EthPkt *ethpkt; //Ethernet frame
   IPPkt *ippkt; //IP packet
   char* ptr;
 
   ethpkt = recvethpkt(sd);
   if(ethpkt == NULL) //indicate that the hub is down
+  {
+    printf("##HUB IS DOWN##\n");
     return NULL;
+  }
 
 #ifdef _DEBUG
   dumpethpkt(ethpkt);

@@ -63,6 +63,7 @@ int processdata(int sock, char* dat, int len, int type, in_addr_t src_addr)
   }
   else if(type == DATA_DV)
   { /** FILL IN YOUR CODE in dv_update_routing_info() function */
+    printf("##IN processdata(), and it is DATA_DV type\n");
 		dv_update_routing_info(sock, dat, len, src_addr);
    /** the memory should be freed */
     free(dat);

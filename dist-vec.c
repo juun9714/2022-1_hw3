@@ -133,7 +133,7 @@ int dv_broadcast_dv_message()
 
 
 #ifdef _DEBUG
-  printf("dv_broadcast_dv_message(): the router broadcasts ite routing information\n");
+  //printf("dv_broadcast_dv_message(): the router broadcasts ite routing information\n");
 #endif
 
   return 1;   
@@ -335,7 +335,7 @@ int dv_forward(IPPkt* ippkt)
   dst.s_addr = ippkt->dst;
   strcpy(src_addr, inet_ntoa(src)); 
   strcpy(dst_addr, inet_ntoa(dst)); 
-  printf("The router should forward the IP packet (source: %s, destination: %s)\n", src_addr, dst_addr);
+  //printf("The router should forward the IP packet (source: %s, destination: %s)\n", src_addr, dst_addr);
 #endif
 
   /** FILL IN YOUR CODE */
@@ -346,35 +346,6 @@ int dv_forward(IPPkt* ippkt)
 
       3. send the Ethernet frame to the appropriate hub
   **************************************************************************************************/
-  // HwAddr srchwaddr;
-  // HwAddr dsthwaddr;
-  // EthPkt ethpcket;
-  // // printf("gere\n");
-  // int sock=-1;
-  // for(int i=0;i<g_fw_table_size;i++){
-  //   // printf("here\n");
-  //   // printf("%d\n",dst.s_addr & g_fw_table[i].mask);
-  //   // printf("%d\n",g_fw_table[i].next);
-  //   // if((dst.s_addr & g_fw_table[i].mask)==g_fw_table[i].next){//dst ip address의 net addr이 forward table의 next hop이랑 동일한게 있으면, 거기로 forward
-  //     // arp_ipaddr_to_hwaddr(src.s_addr, srchwaddr);//MAC
-  //     // arp_ipaddr_to_hwaddr(dst.s_addr, dsthwaddr);//MAC
-  //     // memcpy(ethpcket.dst, dsthwaddr, sizeof(HwAddr));
-  //     // memcpy(ethpcket.src, srchwaddr, sizeof(HwAddr));
-  //     // ethpcket.len=ippkt->len;
-  //     // ethpcket.dat=ippkt->dat;
-  //     //packet내용 수정하기
-
-
-  //     sock=dv_get_sock_for_destination(sock, src.s_addr, g_fw_table[i].next);
-
-  //     if(sock==-1)
-  //       printf("cannot find appropriate sock\n");
-  //     else
-  //       printf("found sock is %d\n",sock);
-
-  //     //forwardethpkt(sock, &ethpcket);
-  //     sendippkt(sock, ippkt);
-  //   }
   printf("1\n");
   dumpippkt(ippkt);
   printf("2\n");
@@ -471,27 +442,6 @@ int dv_get_sock_for_destination(int sock, in_addr_t src, in_addr_t dst)
       return sock;
     }
   }
-
-  // struct in_addr dstt, hey;
-  // char dstt_addr[16];
-  // char hey_addr[16];
-  // sock=-1;
-  // for(int i=0;i<g_fw_table_size;i++){
-  //   dstt.s_addr = dst;
-  //   hey.s_addr=g_fw_table[i].dest;
-  //   strcpy(dstt_addr, inet_ntoa(dstt));
-  //   strcpy(hey_addr, inet_ntoa(hey));
-
-  //   printf("%s\n",dstt_addr);
-  //   printf("%s\n",hey_addr);
-  //   // printf("%d\n",g_fw_table[i].dest);
-  //   if(dst==g_fw_table[i].dest){
-  //     sock=g_fw_table[i].itf;
-  //     //printf("sock found : %d\n",sock);
-  //     return sock;
-  //   }
-  // }
-
   return sock;
 }
 
